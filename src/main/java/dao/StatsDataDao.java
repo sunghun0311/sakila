@@ -118,7 +118,7 @@ public List<Map<String, Object>> languageFilmCount() {
     conn = DBUtil.getConnection();
     String sql = "SELECT l.name name,"
     		+ "			 COUNT(*) languageCount"
-    		+ "FROM film f INNER JOIN language 1"
+    		+ "FROM film f INNER JOIN language l"
     		+ "ON f.language_id = i.language_id"
     		+ "GROUP BY l.name";
     try {
@@ -126,7 +126,7 @@ public List<Map<String, Object>> languageFilmCount() {
        rs = stmt.executeQuery();
        while(rs.next()) {
           Map<String, Object> m = new HashMap<>();
-          m.put("name",rs.getInt("name"));
+          m.put("name",rs.getString("name"));
           m.put("languageCount",rs.getInt("languageCount"));
           list.add(m);
        }
@@ -166,6 +166,136 @@ public List<Map<String, Object>> lengthFilmCount() {
           Map<String, Object> m = new HashMap<>();
           m.put("length2",rs.getInt("length2"));
           m.put("lengthCount",rs.getInt("lengthCount"));
+          list.add(m);
+       }
+    } catch (SQLException e) {
+       e.printStackTrace();
+    } finally {
+       try {
+          rs.close();
+          stmt.close();
+          conn.close();
+       } catch (SQLException e) {
+          e.printStackTrace();
+       }
+    }
+    return list;
+ }
+public List<Map<String, Object>> amount() {
+    List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    conn = DBUtil.getConnection();
+    String sql = "SELECT SUM(amount) sum"
+    		+ "FROM payment";
+    try {
+       stmt = conn.prepareStatement(sql);
+       rs = stmt.executeQuery();
+       while(rs.next()) {
+          Map<String, Object> m = new HashMap<>();
+          m.put("sum",rs.getInt("sum"));
+          list.add(m);
+       }
+    } catch (SQLException e) {
+       e.printStackTrace();
+    } finally {
+       try {
+          rs.close();
+          stmt.close();
+          conn.close();
+       } catch (SQLException e) {
+          e.printStackTrace();
+       }
+    }
+    return list;
+ }
+public List<Map<String, Object>> salesByStaff() {
+    List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    conn = DBUtil.getConnection();
+    String sql = "SELECT staff_id staffId, SUM(amount) sum"
+    		+ "FROM payment"
+    		+ "GROUP BY staff_id";
+    try {
+       stmt = conn.prepareStatement(sql);
+       rs = stmt.executeQuery();
+       while(rs.next()) {
+          Map<String, Object> m = new HashMap<>();
+          m.put("staffId",rs.getInt("staffId"));
+          m.put("sum",rs.getInt("sum"));
+          list.add(m);
+       }
+    } catch (SQLException e) {
+       e.printStackTrace();
+    } finally {
+       try {
+          rs.close();
+          stmt.close();
+          conn.close();
+       } catch (SQLException e) {
+          e.printStackTrace();
+       }
+    }
+    return list;
+ }
+public List<Map<String, Object>> annualSalesBystaff() {
+    List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    conn = DBUtil.getConnection();
+    String sql = "SELECT staff_id staffId, YEAR(payment_date) year, SUM(amount) sum"
+    		+ "FROM payment\r\n"
+    		+ "GROUP BY staff_id, YEAR(payment_date)";
+    try {
+       stmt = conn.prepareStatement(sql);
+       rs = stmt.executeQuery();
+       while(rs.next()) {
+          Map<String, Object> m = new HashMap<>();
+          m.put("staffId",rs.getInt("staffId"));
+          m.put("sum",rs.getInt("year"));
+          m.put("sum",rs.getInt("sum"));
+          list.add(m);
+       }
+    } catch (SQLException e) {
+       e.printStackTrace();
+    } finally {
+       try {
+          rs.close();
+          stmt.close();
+          conn.close();
+       } catch (SQLException e) {
+          e.printStackTrace();
+       }
+    }
+    return list;
+ }
+public List<Map<String, Object>> salesByStore() {
+    List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    conn = DBUtil.getConnection();
+    String sql = "SELECT t.category_id categoryId, c.name name, t.cnt cnt"
+    		+ "FROM (SELECT category_id, COUNT(*) cnt"
+    		+ "      FROM film_category"
+    		+ "      GROUP BY category_id"
+    		+ "      ORDER BY COUNT(*) DESC) t"
+    		+ "      INNER JOIN  "
+    		+ "      category c"
+    		+ "      ON t.category_id = c.category_id"
+    		+ "ORDER BY t.cnt DESC";
+    try {
+       stmt = conn.prepareStatement(sql);
+       rs = stmt.executeQuery();
+       while(rs.next()) {
+          Map<String, Object> m = new HashMap<>();
+          m.put("storeId",rs.getInt("categoryId"));
+          m.put("sum",rs.getString("name"));
+          m.put("cnt",rs.getInt("cnt"));
           list.add(m);
        }
     } catch (SQLException e) {
