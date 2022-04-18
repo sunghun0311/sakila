@@ -5,6 +5,14 @@ public class Store { // 도메인 일치
 	private int managerStaffId;
 	private int addressId;
 	private String lastUpdate;
+	
+	
+	@Override
+	public String toString() {
+		return "Store [storeId=" + storeId + ", managerStaffId=" + managerStaffId + ", addressId=" + addressId
+				+ ", lastUpdate=" + lastUpdate + "]";
+	}
+	// 겟터, 셋터
 	public int getStoreId() {
 		return storeId;
 	}

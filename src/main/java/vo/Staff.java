@@ -13,7 +13,14 @@ public class Staff {
 	private String lastUpdate;
 	public int getStaffId() {
 		return staffId;
+	}	
+	@Override
+	public String toString() {
+		return "Staff [staffId=" + staffId + ", firstName=" + firstName + ", lastName=" + lastName + ", addressId="
+				+ addressId + ", picture=" + picture + ", email=" + email + ", storeId=" + storeId + ", active="
+				+ active + ", userName=" + userName + ", passWord=" + passWord + ", lastUpdate=" + lastUpdate + "]";
 	}
+	// 겟터, 셋터
 	public void setStaffId(int staffId) {
 		this.staffId = staffId;
 	}

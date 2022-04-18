@@ -22,9 +22,13 @@
 	ActorInfoDao actorInfoDao = new ActorInfoDao();
 	list = actorInfoDao.selectActorInfoListByPage(beginRow, rowPerPage);
 	
-	totalRow = actorInfoDao.totalRow();
-	System.out.println(totalRow+"<--totalRow");
-	lastPage = (totalRow / rowPerPage); // 마지막 페이지는 -> 전체 데이터수 / 화면당 보여지는 데이터 수
+	totalRow = actorInfoDao.selectActorInfoTotalRow();
+	System.out.println(totalRow+"<--selectActorInfoTotalRow");
+	// 마지막 페이지 구하기
+	lastPage = totalRow / rowPerPage; // 마지막 페이지는 -> 전체 데이터수 / 화면당 보여지는 데이터 수
+	if(totalRow % rowPerPage != 0){
+		lastPage++;
+	}
 %>
 <!DOCTYPE html>
 <html>

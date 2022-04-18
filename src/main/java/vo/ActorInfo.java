@@ -11,6 +11,7 @@ public class ActorInfo {
 	public String toString(){
 		return this.actorId + this.firstName + this.lastName + this.filmInfo;
 	}
+	디버깅시에 toString()를 사용하면 편하다. -> 값을 편하게 확인이 가능하다.
 	 */
 	@Override
 	public String toString() {

@@ -87,6 +87,7 @@
 			</tr>
 		</table>
 	</form>
+		<a href="<%=request.getContextPath() %>/index.jsp">home</a>
 </body>
 </html>
 

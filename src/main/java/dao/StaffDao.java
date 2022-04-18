@@ -14,6 +14,7 @@ public class StaffDao {
 		try {
 			//Class.forName("org.mariadb.jdbc.Driver");
 			//conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/sakila","root","java1234");
+			//pw같은 연결(로그인)데이터값이 변경되도 쉽게 변경할 수 있도록(DBUtil 내부 getConnection) util.DBUtil을 생성
 			conn = DBUtil.getConnection();
 			
 			String sql = " SELECT s.manager_staff_id staffId,"
@@ -27,8 +28,10 @@ public class StaffDao {
 					+ " INNER JOIN address a"
 					+ " ON s.manager_staff_id = m.staff_id"
 					+ " AND s.address_id =a.address_id; ";
+			// staff 쿼리 저장
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
+			// 데이터 변환
 			while(rs.next()) {
 				Map<String, Object> map = new HashMap<>(); // 다형성
 				map.put("staffId",rs.getInt("staffId"));
@@ -40,10 +43,10 @@ public class StaffDao {
 				list.add(map);
 				
 		    }
-		}catch (Exception e) {
+		}catch (Exception e) { // ClassNotFoundException, SQLException두개의 예외를 부모타입 Exception으로 처리 -> 다형성
 			e.printStackTrace();
 			System.out.println("예외발생"); //예외발생시 출력
-		} finally {
+		} finally { // DB 연결종료 코드
 			try {
 				rs.close();
 				stmt.close();

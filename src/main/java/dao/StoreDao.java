@@ -4,6 +4,7 @@ import util.DBUtil;
 
 import java.sql.*;
 public class StoreDao {
+	// StoreId를 구하는 메서드만 사용할 수 있음
 	public List<Map<String, Object>> selectStoreList() {
 		List<Map<String, Object>> list = new ArrayList<>(); // 다형성
 		Connection conn = null;
@@ -66,6 +67,36 @@ public class StoreDao {
 		return list;
 	}
 	
+	// StoreId를 구하는 메서드
+		public List<Integer> selectStoreIdList(){
+			List<Integer> list = new ArrayList<Integer>();
+			Connection conn = null;
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			String sql = "SELECT DISTINCT store_id storeId FROM store ORDER BY storeId";
+			try {
+				conn = DBUtil.getConnection();
+				stmt = conn.prepareStatement(sql);
+				rs = stmt.executeQuery();
+				while(rs.next()) {
+					list.add(rs.getInt("storeId"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					rs.close();
+					stmt.close();
+					conn.close();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			return list; // 1,2 떨어질거임 매장이 두개여서
+		}
+	
+
 	// selectStoreList() 테스트 코드 <- 단위테스트
 	public static void main(String[] args) {
 		StoreDao dao = new StoreDao();

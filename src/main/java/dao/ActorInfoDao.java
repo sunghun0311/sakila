@@ -5,8 +5,10 @@ import util.DBUtil;
 import vo.ActorInfo;
 
 public class ActorInfoDao {
+	
+		// 페이징작업, ActorInfo List 보여주기
 		public List<ActorInfo> selectActorInfoListByPage(int beginRow, int rowPerPage) {
-			List<ActorInfo> list = new ArrayList<>();
+			List<ActorInfo> list = new ArrayList<ActorInfo>();
 		
 			Connection conn = null;
 			PreparedStatement stmt = null;
@@ -21,7 +23,7 @@ public class ActorInfoDao {
 			 rs = stmt.executeQuery();
 			 while(rs.next()) {
 				 ActorInfo a = new ActorInfo();
-				 a.setActorId(rs.getInt("actorId"));
+				 a.setActorId(rs.getInt("actorId")); // alias
 				 a.setActorId(rs.getInt("firstName"));
 				 a.setActorId(rs.getInt("lastName"));
 				 a.setActorId(rs.getInt("filmInfo"));
@@ -41,8 +43,8 @@ public class ActorInfoDao {
 		}
 		return list;
 	}
-	
-		public int totalRow() throws Exception {
+		// 전체 페이지 구하기(총 개수 구하기)
+		public int selectActorInfoTotalRow() throws Exception {
 			int row = 0; // 전체 행의 수 변수 초기화
 			
 			Connection conn = null;
@@ -58,6 +60,7 @@ public class ActorInfoDao {
 					rs = stmt.executeQuery();
 					if(rs.next()) { 
 						row = rs.getInt("cnt");
+						System.out.println(row+"<- selectActorInfoTotalRow");
 					}
 			} catch (SQLException e) {
 				e.printStackTrace();
