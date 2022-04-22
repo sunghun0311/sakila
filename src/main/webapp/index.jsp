@@ -8,19 +8,19 @@
 <body>
 	<h1>INDEX</h1>
 	<ol>
-		<li><a href="<%=request.getContextPath()%>/storeList.jsp">Store List</a></li>
-		<li><a href="<%=request.getContextPath()%>/staffList.jsp">Staff List</a></li>
+		<li><a href="<%=request.getContextPath()%>/Table/storeList.jsp">Store List</a></li>
+		<li><a href="<%=request.getContextPath()%>/Table/staffList.jsp">Staff List</a></li>
 	</ol>
 	<h3>뷰</h3>
 	<ol>
 		<!-- view 7개 리스트 -->
-		<li><a href="<%=request.getContextPath()%>/ActorInfoList.jsp">ActorInfoList(view)</a></li>
-		<li><a href="<%=request.getContextPath()%>/CustomerList.jsp">CustomerList(view)</a></li>
-		<li><a href="<%=request.getContextPath()%>/FilmList.jsp">FilmList(view)</a></li>
-		<li><a href="<%=request.getContextPath()%>/NicerButSlowerFilmList.jsp">NicerButSlowerFilmList(view)</a></li>
-		<li><a href="<%=request.getContextPath()%>/SalesByFilmCategory.jsp">SalesByFilmCategory(view)</a></li>
-		<li><a href="<%=request.getContextPath()%>/SalesByStore.jsp">SalesByStore(view)</a></li>
-		<li><a href="<%=request.getContextPath()%>/staffList.jsp">staffList(view)</a></li>								
+		<li><a href="<%=request.getContextPath()%>/View/actorInfoList.jsp">ActorInfoList(view)</a></li>
+		<li><a href="<%=request.getContextPath()%>/View/customerList.jsp">CustomerList(view)</a></li>
+		<li><a href="<%=request.getContextPath()%>/View/filmList.jsp">FilmList(view)</a></li>
+		<li><a href="<%=request.getContextPath()%>/View/nicerButSlowerFilmList.jsp">NicerButSlowerFilmList(view)</a></li>
+		<li><a href="<%=request.getContextPath()%>/View/salesByFilmCategory.jsp">SalesByFilmCategory(view)</a></li>
+		<li><a href="<%=request.getContextPath()%>/View/salesByStore.jsp">SalesByStore(view)</a></li>
+		<li><a href="<%=request.getContextPath()%>/View/staffList.jsp">staffList(view)</a></li>								
 	</ol>
 	<h3>프로시저</h3>
 	<ol>
