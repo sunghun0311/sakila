@@ -16,13 +16,13 @@
 	// 현재 페이지 currentPage 변경 -> beginRow로 
 	int beginRow = (currentPage-1)*rowPerPage;
 	
-	// CustomerListDao 호출 -> Dao
+	// FilmListDao 호출 -> Dao
 	FilmListDao filmListDao = new FilmListDao();
-	// CustomerList 호출 -> vo
+	// FilmList 호출 -> vo
 	FilmList filmList = new FilmList();
-	// selectCustomerListByPage -> 쿼리
+	// selectFilmListByPage -> 쿼리
 	List<FilmList> list = filmListDao.selectFilmListByPage(beginRow,rowPerPage);
-	// selectCustomerTotalRow -> 총 개수 페이지, 전체 페이지(페이징 작업) -> 마지막 페이지
+	// selectFilmListTotalRow -> 총 개수 페이지, 전체 페이지(페이징 작업) -> 마지막 페이지
 	// 마지막 페이지 변수 값 저장 코드
 	int lastPage = 0;
 	int totalCount = filmListDao.selectFilmListTotalRow();
@@ -85,14 +85,14 @@
 		<%
 			if(currentPage > 1) {
 		%>
-				<a href="<%=request.getContextPath()%>/ViewTable/filmList.jsp?currentPage=<%=currentPage-1%>">이전</a>
+				<a href="<%=request.getContextPath()%>/View/filmList.jsp?currentPage=<%=currentPage-1%>">이전</a>
 		<%		
 			}
 		%>
 		<%
 			if(currentPage < lastPage) {
 		%>
-				<a href="<%=request.getContextPath()%>/ViewTable/filmList.jsp?currentPage=<%=currentPage+1%>">다음</a>
+				<a href="<%=request.getContextPath()%>/View/filmList.jsp?currentPage=<%=currentPage+1%>">다음</a>
 		<%
 			}
 		%>
