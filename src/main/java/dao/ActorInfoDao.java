@@ -24,9 +24,9 @@ public class ActorInfoDao {
 			 while(rs.next()) {
 				 ActorInfo a = new ActorInfo();
 				 a.setActorId(rs.getInt("actorId")); // alias
-				 a.setActorId(rs.getInt("firstName"));
-				 a.setActorId(rs.getInt("lastName"));
-				 a.setActorId(rs.getInt("filmInfo"));
+				 a.setFirstName(rs.getString("firstName"));
+				 a.setLastName(rs.getString("lastName"));
+				 a.setFilmInfo(rs.getString("filmInfo"));
 				 a.toString();
 				 list.add(a);
 			 	}		 

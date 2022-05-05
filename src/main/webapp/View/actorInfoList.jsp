@@ -55,11 +55,11 @@
 					<td><%=a.getActorId() %></td>
 					<td><%=a.getFirstName() %></td>
 					<td><%=a.getLastName() %></td>
-					<td><%=a.getFilmInfo() %></td>				
-				</tr>
-						<%
-								}
-						%>
+					<td><%=a.getFilmInfo() %></td>								
+			<%
+					}
+			%>
+				</tr>			
 			</tbody>
 	</table>
 	<!-- 페이지 부분 -->
@@ -67,14 +67,14 @@
 		<%
 			if(currentPage > 1) {
 		%>
-				<a href="<%=request.getContextPath() %>/actorInfoList.jsp?currentPage=<%=currentPage-1 %>">이전</a>
+				<a href="<%=request.getContextPath()%>/View/actorInfoList.jsp?currentPage=<%=currentPage-1%>">이전</a>
 		<%
 			}
 		%>
 		<%
 			if(currentPage < lastPage) {
 		%>
-				<a href="<%=request.getContextPath() %>/actorInfoList.jsp?currentPage=<%=currentPage+1 %>">다음</a>
+				<a href="<%=request.getContextPath()%>/View/actorInfoList.jsp?currentPage=<%=currentPage+1%>">다음</a>
 		<%
 			}
 		%>
